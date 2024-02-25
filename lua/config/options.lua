@@ -51,6 +51,7 @@ M.load_options = function()
     numberwidth = 4, -- set number column width to 2 {default 4}
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = true, -- display long lines with wrap
+    wrapmargin = 8,
     linebreak = true, -- set the title of window to the value of the titlestring
     spell = false,
     spelllang = "en",
@@ -58,6 +59,7 @@ M.load_options = function()
     sidescrolloff = 8,
     pumblend = 20,
     winblend = 00, -- keep notify transparent
+    -- textwidth = 80,
     inccommand = "nosplit",
   } ---  VIM ONLY COMMANDS  ---cmd "filetype plugin on"cmd('let &titleold="' .. TERMINAL .. '"')cmd "set inccommand=split"cmd "set iskeyword+=-"
 

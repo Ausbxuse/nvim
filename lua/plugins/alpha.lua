@@ -7,6 +7,9 @@ return {
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
       local logo = [[
+
+
+
 		      ___              __                             
 		     /   | __  _______/ /_  _  ____  __________       
 		    / /| |/ / / / ___/ __ \| |/_/ / / / ___/ _ \      
@@ -14,17 +17,26 @@ return {
 		  /_/  |_\__,_/____/_.___/_/|_|\__,_/____/\___/       
       ]]
 
-      local header = {
+      local thingy = io.popen('echo "$(date "+%I:%M %p %A, %b %d %Y")" | tr -d "\n"')
+      local date = thingy:read("*a")
+      thingy:close()
+
+      local heading = {
         type = "text",
-        val = {
-          [[       ___              __                          ]],
-          [[      /   | __  _______/ /_  _  ____  __________    ]],
-          [[     / /| |/ / / / ___/ __ \| |/_/ / / / ___/ _ \   ]],
-          [[    / ___ / /_/ (__  ) /_/ />  </ /_/ (__  )  __/   ]],
-          [[   /_/  |_\__,_/____/_.___/_/|_|\__,_/____/\___/    ]],
+        val = "",
+        opts = {
+          position = "center",
+          hl = "MatchParen",
         },
-        opts = { position = "center", hl = "Comment" },
       }
+
+      local heading2 = {
+        type = "text",
+        val = "┌─  " .. date .. " ─┐",
+        opts = { position = "center", hl = "String" },
+      }
+      dashboard.section.heading = heading
+      dashboard.section.heading2 = heading2
 
       dashboard.section.header.val = vim.split(logo, "\n")
       -- stylua: ignore
@@ -55,6 +67,7 @@ return {
           { type = "padding", val = 1 },
           section.header,
           { type = "padding", val = 2 },
+          section.heading2,
           section.heading,
           { type = "padding", val = 1 },
           -- section.top_bar,
@@ -90,22 +103,22 @@ return {
       } ]]
 
       dashboard.section.footer.val = fortune
-      --[[ vim.api.nvim_create_autocmd("User", {
+      vim.api.nvim_create_autocmd("User", {
         once = true,
         pattern = "LazyVimStarted",
         callback = function()
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          dashboard.section.heading.val = "⚡ Neovim loaded "
+          dashboard.section.heading.val = "└─ ⚡loaded "
             .. stats.loaded
             .. "/"
             .. stats.count
             .. " plugins in "
             .. ms
-            .. "ms"
+            .. "ms ─┘"
           pcall(vim.cmd.AlphaRedraw)
         end,
-      }) ]]
+      })
     end,
   },
 }
