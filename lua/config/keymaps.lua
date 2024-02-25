@@ -11,6 +11,7 @@ vim.keymap.set("n", "<leader>r", ":call Compile() <CR>")
 vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>b<cr>", "<cmd>e #<cr>")
 vim.keymap.set("n", "<leader>/", ":Telescope current_buffer_fuzzy_find<cr>")
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fd", ":Telescope cder hidden=true<cr>")
 
 vim.keymap.set("n", "<leader>fj", "<cmd>Telescope commands<cr>")
