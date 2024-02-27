@@ -54,6 +54,12 @@ return {
         return ""
       end
     end
+    local function getMyCwd()
+      local home = os.getenv("HOME") -- Get the home directory path
+      local cwd = vim.fn.getcwd() -- Get the current working directory
+      local cwd_with_tilde = cwd:gsub("^" .. home, "~") -- Replace the home directory with ~
+      return cwd_with_tilde -- Print the modified path
+    end
 
     return {
       options = {
@@ -81,7 +87,10 @@ return {
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
-            "filename",
+            getMyCwd,
+
+            color = Util.ui.fg("ModeMsg"),
+            --[[ "filename",
             file_status = true,
             path = 3,
             shorting_target = 40,
@@ -90,7 +99,7 @@ return {
               readonly = "", -- Text to show when the file is non-modifiable or readonly.
               unnamed = "[No Name]", -- Text to show for unnamed buffers.
               newfile = "[New]", -- Text to show for new created file before first writting
-            },
+            }, ]]
           },
         },
         lualine_x = {

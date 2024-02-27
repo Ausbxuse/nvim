@@ -4,4 +4,5 @@
 --
 vim.cmd([[
     autocmd Filetype tex,markdown set wrap linebreak wrapmargin=8
+    autocmd Filetype tex,markdown setlocal foldmethod=expr | setlocal foldexpr=vimtex#fold#level(v:lnum) | setlocal foldtext=vimtex#fold#text()
 ]])
