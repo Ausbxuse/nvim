@@ -17,7 +17,7 @@ return {
 		  /_/  |_\__,_/____/_.___/_/|_|\__,_/____/\___/       
       ]]
 
-      local thingy = io.popen('echo "$(date "+%I:%M %p %A, %b %d %Y")" | tr -d "\n"')
+      local thingy = io.popen('echo "Now: $(date "+%I:%M %p %a, %b %d %Y")" | tr -d "\n"')
       local date = thingy:read("*a")
       thingy:close()
 
