@@ -31,12 +31,15 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 
--- Better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
-
 vim.keymap.set("x", "K", ":move '<-2<CR>gv=gv")
 vim.keymap.set("x", "J", ":move '>+1<CR>gv=gv")
+
+vim.keymap.set("n", "<A-j>", "", { desc = "No op" })
+vim.keymap.set("n", "<A-k>", "", { desc = "No op" })
+vim.keymap.set("i", "<A-j>", "", { desc = "No op" })
+vim.keymap.set("i", "<A-k>", "", { desc = "No op" })
+vim.keymap.set("v", "<A-j>", "", { desc = "No op" })
+vim.keymap.set("v", "<A-k>", "", { desc = "No op" })
 
 vim.keymap.set("x", "al", function()
   require("align").align_to_string(false, true, true)
@@ -56,7 +59,6 @@ else
 end
 
 vim.cmd([[
-nnoremap S :%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 map <leader>c :silent w! \| silent !compile "%:p"<CR>
 map <leader>p :silent !opout "%:p"<CR>
 
