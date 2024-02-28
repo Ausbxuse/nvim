@@ -8,8 +8,6 @@ return {
       local dashboard = require("alpha.themes.dashboard")
       local logo = [[
 
-
-
 		      ___              __                             
 		     /   | __  _______/ /_  _  ____  __________       
 		    / /| |/ / / / ___/ __ \| |/_/ / / / ___/ _ \      

@@ -1,5 +1,34 @@
 return {
   {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "LazyFile",
+    opts = {
+      indent = {
+        char = "▏",
+        -- char = "│",
+        tab_char = "▏",
+        -- tab_char = "│",
+      },
+      scope = { enabled = false },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+      },
+    },
+    main = "ibl",
+  },
+  {
     "echasnovski/mini.indentscope",
     config = function()
       require("mini.indentscope").setup({
@@ -21,8 +50,8 @@ return {
           -- Symbol priority. Increase to display on top of more symbols.
           priority = 2,
         },
-        symbol = "│",
-        -- symbol = "▏",
+        -- symbol = "│",
+        symbol = "▏",
       })
     end,
   },

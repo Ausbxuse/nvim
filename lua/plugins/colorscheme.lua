@@ -1,6 +1,8 @@
+local home = vim.fn.expand("$HOME")
 return {
   {
-    "ausbxuse/snappy.nvim",
+    -- "ausbxuse/snappy.nvim",
+    dir = home .. "/.local/src/public-repos/snappy.nvim",
     config = function()
       require("snappy").setup({
         on_colors = function(colors)

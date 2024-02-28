@@ -58,7 +58,7 @@ return {
       local home = os.getenv("HOME") -- Get the home directory path
       local cwd = vim.fn.getcwd() -- Get the current working directory
       local cwd_with_tilde = cwd:gsub("^" .. home, "~") -- Replace the home directory with ~
-      return cwd_with_tilde -- Print the modified path
+      return cwd_with_tilde .. "/" -- Print the modified path
     end
 
     return {
