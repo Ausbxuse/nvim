@@ -7,7 +7,7 @@ return {
   config = function()
     local home = vim.fn.expand("$HOME")
     require("chatgpt").setup({
-      api_key_cmd = "gpg --decrypt " .. home .. "/Documents/gptkey2.gpg",
+      api_key_cmd = "gpg --decrypt " .. home .. "/Documents/gptkey.gpg",
       openai_params = {
         model = "gpt-3.5-turbo",
         frequency_penalty = 0,
