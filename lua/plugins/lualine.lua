@@ -87,10 +87,10 @@ return {
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
-            getMyCwd,
+            -- getMyCwd,
 
-            color = Util.ui.fg("ModeMsg"),
-            --[[ "filename",
+            -- color = Util.ui.fg("ModeMsg"),
+            "filename",
             file_status = true,
             path = 3,
             shorting_target = 40,
@@ -99,7 +99,7 @@ return {
               readonly = "", -- Text to show when the file is non-modifiable or readonly.
               unnamed = "[No Name]", -- Text to show for unnamed buffers.
               newfile = "[New]", -- Text to show for new created file before first writting
-            }, ]]
+            },
           },
         },
         lualine_x = {

@@ -1,3 +1,4 @@
+local Util = require("lazyvim.util")
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
@@ -44,6 +45,27 @@ vim.keymap.set("v", "<A-k>", "", { desc = "No op" })
 vim.keymap.set("x", "al", function()
   require("align").align_to_string(false, true, true)
 end, NS) -- Aligns to a string, looking left and with previews
+
+-- floating terminal
+local lazyterm = function()
+  Util.terminal(nil, { cwd = Util.root() })
+end
+vim.keymap.set("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
+vim.keymap.set("n", "<leader>fT", function()
+  Util.terminal()
+end, { desc = "Terminal (cwd)" })
+vim.keymap.set("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
+vim.keymap.set("n", "<leader>\\", lazyterm, { desc = "Terminal (root dir)" })
+vim.keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
+
+-- Terminal vim.keymap.setpings
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Normal" })
+vim.keymap.set("t", "<C-h>", "", { desc = "Noop" })
+vim.keymap.set("t", "<C-j>", "", { desc = "Noop" })
+vim.keymap.set("t", "<C-k>", "", { desc = "Noop" })
+vim.keymap.set("t", "<C-l>", "", { desc = "Noop" })
+vim.keymap.set("t", "<C-/>", "", { desc = "Noop" })
+vim.keymap.set("t", "<c-_>", "", { desc = "Noop" })
 
 if vim.bo.filetype == "NvimTree" then
   local api = require("nvim-tree.api")

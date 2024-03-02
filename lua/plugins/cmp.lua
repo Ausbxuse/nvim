@@ -28,6 +28,7 @@ return {
       local cmp = require("cmp")
       opts.sources = cmp.config.sources({
         { name = "nvim_lsp" },
+        { name = "luasnip" },
         { name = "path" },
         { name = "spell" },
         { name = "emoji" },
@@ -41,7 +42,6 @@ return {
         -- Define menu shorthand for different completion sources.
         local menu_icon = {
           nvim_lsp = "LSP",
-          -- nvim_lua = "NLUA",
           luasnip = "SNP",
           buffer = "BUF",
           path = "PTH",
@@ -91,7 +91,7 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-            cmp.select_next_item()
+            cmp.confirm({ select = true })
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
             -- this way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
@@ -107,6 +107,22 @@ return {
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+
+        ["<C-j>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+
+        ["<C-k>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
           else
             fallback()
           end
