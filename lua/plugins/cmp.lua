@@ -26,6 +26,8 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+
+      opts.experimental.ghost_text = false
       opts.sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },

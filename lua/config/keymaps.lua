@@ -26,7 +26,7 @@ vim.keymap.set("n", "<C-n>", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
 vim.keymap.set(
   "n",
-  "<leader>s",
+  "<leader>sp",
   "<cmd> lua require('telescope.builtin').spell_suggest(require('telescope.themes').get_cursor({}))<cr>"
 )
 

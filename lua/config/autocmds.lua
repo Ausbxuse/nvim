@@ -3,6 +3,7 @@
 -- Add any additional autocmds here
 --
 vim.cmd([[
-    autocmd Filetype tex,markdown set wrap linebreak wrapmargin=8
-    autocmd Filetype tex,markdown setlocal foldmethod=expr | setlocal foldexpr=vimtex#fold#level(v:lnum) | setlocal foldtext=vimtex#fold#text()
+    "autocmd Filetype tex,markdown set wrap linebreak wrapmargin=8
+    "autocmd Filetype tex,markdown setlocal foldmethod=expr | setlocal foldexpr=vimtex#fold#level(v:lnum) | setlocal foldtext=vimtex#fold#text()
+    autocmd Filetype markdown setlocal textwidth=80
 ]])

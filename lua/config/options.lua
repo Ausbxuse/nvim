@@ -6,6 +6,7 @@ local M = {}
 
 M.load_options = function()
   local opt = vim.opt
+  opt.textwidth = 80
 
   local home = vim.fn.expand("$HOME")
   local default_options = {
@@ -13,7 +14,7 @@ M.load_options = function()
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
     cmdheight = 1, -- more space in the neovim command line for displaying messages
-    colorcolumn = "99999", -- fixes indentline for now
+    colorcolumn = "80", -- fixes indentline for now
     completeopt = { "menuone", "noselect" },
     -- conceallevel = 0, -- so that `` is visible in markdown files
     fileencoding = "utf-8", -- the encoding written to a file
@@ -51,15 +52,15 @@ M.load_options = function()
     -- numberwidth = 4, -- set number column width to 2 {default 4}
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = true, -- display long lines with wrap
-    wrapmargin = 8,
-    -- linebreak = true, -- set the title of window to the value of the titlestring
+    -- wrapmargin = 8,
+    linebreak = true, -- set the title of window to the value of the titlestring
     spell = false,
     -- spelllang = "en",
     -- scrolloff = 8, -- is one of my fav
     -- sidescrolloff = 8,
     pumblend = 20,
     winblend = 00, -- keep notify transparent
-    -- textwidth = 80,
+    textwidth = 80,
     -- inccommand = "nosplit",
   } ---  VIM ONLY COMMANDS  ---cmd "filetype plugin on"cmd('let &titleold="' .. TERMINAL .. '"')cmd "set inccommand=split"cmd "set iskeyword+=-"
 
