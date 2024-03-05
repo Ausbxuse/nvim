@@ -5,7 +5,7 @@ return {
     dir = home .. "/.local/src/public-repos/capture.nvim",
     config = function()
       require("capture").setup({
-        capture_file_path = home .. "/Documents/Notes/Public/Todolist.md",
+        capture_file_path = home .. "/Documents/Notes/Todolist.md",
       })
     end,
   },
