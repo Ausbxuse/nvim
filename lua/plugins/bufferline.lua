@@ -43,6 +43,11 @@ return {
           .. (diag.warning and icons.Warn .. diag.warning or "")
         return vim.trim(ret)
       end,
+      custom_filter = function(buf, buf_nums)
+        if vim.fn.bufname(buf) ~= "<buffer-name-I-dont-want>" then
+          return true
+        end
+      end,
       offsets = {
         {
           filetype = "neo-tree",
