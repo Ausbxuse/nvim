@@ -1,9 +1,11 @@
 local Util = require("lazyvim.util")
+local telescope = require("telescope")
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("n", "<Esc>", ":nohl<CR>")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -13,7 +15,7 @@ vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>b<cr>", "<cmd>e #<cr>")
 vim.keymap.set("n", "<leader>/", ":Telescope current_buffer_fuzzy_find<cr>")
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>fd", ":Telescope cder hidden=true<cr>")
+vim.keymap.set("n", "<leader>fd", telescope.extensions.zoxide.list)
 
 vim.keymap.set("n", "<leader>fj", "<cmd>Telescope commands<cr>")
 
@@ -35,8 +37,24 @@ vim.keymap.set("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 vim.keymap.set("x", "K", ":move '<-2<CR>gv=gv")
 vim.keymap.set("x", "J", ":move '>+1<CR>gv=gv")
 
-vim.keymap.set("n", "<A-k>", require("smart-splits").move_cursor_up, { desc = "No op" })
-vim.keymap.set("n", "<A-j>", require("smart-splits").move_cursor_down, { desc = "No op" })
+vim.keymap.set("n", "<C-Left>", require("smart-splits").resize_left)
+vim.keymap.set("n", "<C-Down>", require("smart-splits").resize_down)
+vim.keymap.set("n", "<C-Up>", require("smart-splits").resize_up)
+vim.keymap.set("n", "<C-Right>", require("smart-splits").resize_right)
+-- moving between splits
+vim.keymap.set("n", "<A-h>", require("smart-splits").move_cursor_left)
+vim.keymap.set("n", "<A-j>", require("smart-splits").move_cursor_down)
+vim.keymap.set("n", "<A-k>", require("smart-splits").move_cursor_up)
+vim.keymap.set("n", "<A-l>", require("smart-splits").move_cursor_right)
+vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous)
+-- swapping buffers between windows
+vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
+vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
+vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
+vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
+
+-- vim.keymap.set("n", "<A-k>", require("smart-splits").move_cursor_up, { desc = "No op" })
+-- vim.keymap.set("n", "<A-j>", require("smart-splits").move_cursor_down, { desc = "No op" })
 vim.keymap.set("i", "<A-j>", "", { desc = "No op" })
 vim.keymap.set("i", "<A-k>", "", { desc = "No op" })
 vim.keymap.set("v", "<A-j>", "", { desc = "No op" })
