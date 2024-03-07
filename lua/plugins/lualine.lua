@@ -72,7 +72,7 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_b = { "" },
 
         lualine_c = {
           Util.lualine.root_dir(),
@@ -152,13 +152,13 @@ return {
           },
         },
         lualine_y = {
-          { "progress", separator = " ", padding = { left = 1, right = 0 } },
-          { "location", padding = { left = 0, right = 1 } },
+          -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          -- { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          function()
+          --[[ function()
             return " " .. os.date("%R")
-          end,
+          end, ]]
         },
       },
       extensions = { "neo-tree", "lazy" },

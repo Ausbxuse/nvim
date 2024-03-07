@@ -67,6 +67,19 @@ vim.keymap.set("t", "<C-l>", "", { desc = "Noop" })
 vim.keymap.set("t", "<C-/>", "", { desc = "Noop" })
 vim.keymap.set("t", "<c-_>", "", { desc = "Noop" })
 
+vim.keymap.set("n", "<C-h>", "", { desc = "Noop" })
+vim.keymap.set("n", "<C-j>", "", { desc = "Noop" })
+vim.keymap.set("n", "<C-k>", "", { desc = "Noop" })
+vim.keymap.set("n", "<C-l>", "", { desc = "Noop" })
+vim.keymap.set("n", "<C-f>", "", { desc = "Noop" })
+vim.keymap.set("n", "<C-/>", "", { desc = "Noop" })
+vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
+
+--[[ vim.keymap.set("n", "<C-f>h", "<C-w>h", { desc = "Go to left window" })
+vim.keymap.set("n", "<C-f>j", "<C-w>j", { desc = "Go to lower window" })
+vim.keymap.set("n", "<C-f>k", "<C-w>k", { desc = "Go to upper window" })
+vim.keymap.set("n", "<C-f>l", "<C-w>l", { desc = "Go to right window" }) ]]
+
 if vim.bo.filetype == "NvimTree" then
   local api = require("nvim-tree.api")
   vim.keymap.del("n", "<CR>")
