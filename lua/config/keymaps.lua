@@ -5,11 +5,11 @@ local telescope = require("telescope")
 -- Add any additional keymaps here
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-vim.keymap.set("n", "<Esc>", ":nohl<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>r", ":call Compile() <CR>")
+vim.keymap.set("n", "<leader>r", "<cmd>call Compile() <CR>")
 
 vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>b<cr>", "<cmd>e #<cr>")
