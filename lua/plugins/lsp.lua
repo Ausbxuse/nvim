@@ -21,6 +21,11 @@ if isTermux() then
       opts = {
         ensure_installed = {},
       },
+      config = function()
+        require("mason-lspconfig").setup({
+          ensured_installed = {},
+        })
+      end,
     },
   }
 end
