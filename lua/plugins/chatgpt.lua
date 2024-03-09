@@ -7,7 +7,7 @@ end
 
 local conf = {}
 
-if ~isTermux() then
+if not isTermux() then
   conf = {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
