@@ -16,6 +16,12 @@ if isTermux() then
         ensure_installed = {},
       },
     },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = {},
+      },
+    },
   }
 end
 
