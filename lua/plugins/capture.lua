@@ -12,7 +12,7 @@ return {
     dir = set_path(home .. "/.local/src/public-repos/capture.nvim"),
     config = function()
       require("capture").setup({
-        capture_file_path = set_path(home .. "/Documents/Notes/Todolist.md"),
+        capture_file_path = set_path(home .. "/Documents/Notes/Fleeting/General.md"),
       })
     end,
   },
