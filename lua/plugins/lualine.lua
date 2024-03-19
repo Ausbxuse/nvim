@@ -64,8 +64,10 @@ return {
     return {
       options = {
         icons_enabled = true,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        -- component_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
+        component_separators = { left = " ", right = " " },
+        section_separators = { left = " ", right = " " },
         theme = custom_theme,
         globalstatus = true,
         disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
@@ -97,8 +99,8 @@ return {
             symbols = {
               modified = "落", -- Text to show when the file is modified.
               readonly = "", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "[No Name]", -- Text to show for unnamed buffers.
-              newfile = "[New]", -- Text to show for new created file before first writting
+              unnamed = "󰟢", -- Text to show for unnamed buffers.
+              newfile = "", -- Text to show for new created file before first writting
             },
           },
         },

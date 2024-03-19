@@ -56,7 +56,7 @@ local default_options = {
   -- sidescrolloff = 8,
   pumblend = 20,
   winblend = 00, -- keep notify transparent
-  textwidth = 80,
+  textwidth = 0,
   -- inccommand = "nosplit",
 } ---  VIM ONLY COMMANDS  ---cmd "filetype plugin on"cmd('let &titleold="' .. TERMINAL .. '"')cmd "set inccommand=split"cmd "set iskeyword+=-"
 
