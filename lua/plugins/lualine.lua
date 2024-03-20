@@ -25,19 +25,21 @@ return {
     local custom_theme = require("lualine.themes.auto")
     -- Change the background of lualine_c section for normal mode
     custom_theme.normal.a.fg = "#5fdaff" -- rgb colors are supported
-    custom_theme.normal.a.bg = "#2c2e3b" -- rgb colors are supported
+    custom_theme.normal.a.bg = "NONE" -- rgb colors are supported
     custom_theme.normal.b.fg = "#5fdaff" -- rgb colors are supported
-    custom_theme.normal.c.bg = "#171920" -- rgb colors are supported
+    custom_theme.normal.b.bg = "NONE" -- rgb colors are supported
+    custom_theme.normal.c.fg = "#eaeaea" -- rgb colors are supported
+    custom_theme.normal.c.bg = "NONE" -- rgb colors are supported
     -- custom_theme.command.c.bg = "#171920" -- rgb colors are supported
-    custom_theme.replace.a.bg = "#ff4a00" -- rgb colors are supported
+    custom_theme.replace.a.bg = "NONE" -- rgb colors are supported
     custom_theme.replace.b.fg = "#ff4a00" -- rgb colors are supported
     -- custom_theme.replace.c.bg = "#171920" -- rgb colors are supported
     custom_theme.visual.a.fg = "#bd93f9" -- rgb colors are supported
-    custom_theme.visual.a.bg = "#2c2e3b" -- rgb colors are supported
+    custom_theme.visual.a.bg = "NONE" -- rgb colors are supported
     custom_theme.visual.b.fg = "#bd93f9" -- rgb colors are supported
     -- custom_theme.visual.c.bg = "#171920" -- rgb colors are supported
     custom_theme.insert.a.fg = "#abe15b" -- rgb colors are supported
-    custom_theme.insert.a.bg = "#2c2e3b" -- rgb colors are supported
+    custom_theme.insert.a.bg = "NONE" -- rgb colors are supported
     custom_theme.insert.b.fg = "#abe15b" -- rgb colors are supported
     -- custom_theme.insert.c.bg = "#171920" -- rgb colors are supported
     --
@@ -74,7 +76,27 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "" },
+        lualine_b = {
+          { "branch" },
+          {
+            "diff",
+            symbols = {
+              added = icons.git.added,
+              modified = icons.git.modified,
+              removed = icons.git.removed,
+            },
+            source = function()
+              local gitsigns = vim.b.gitsigns_status_dict
+              if gitsigns then
+                return {
+                  added = gitsigns.added,
+                  modified = gitsigns.changed,
+                  removed = gitsigns.removed,
+                }
+              end
+            end,
+          },
+        },
 
         lualine_c = {
           Util.lualine.root_dir(),
@@ -127,24 +149,6 @@ return {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,
             color = Util.ui.fg("Special"),
-          },
-          {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-            source = function()
-              local gitsigns = vim.b.gitsigns_status_dict
-              if gitsigns then
-                return {
-                  added = gitsigns.added,
-                  modified = gitsigns.changed,
-                  removed = gitsigns.removed,
-                }
-              end
-            end,
           },
 
           {
