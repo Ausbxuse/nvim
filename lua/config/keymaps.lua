@@ -5,7 +5,7 @@ local telescope = require("telescope")
 -- Add any additional keymaps here
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohl|lua require('notify').dismiss()<CR>")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
