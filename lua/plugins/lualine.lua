@@ -22,6 +22,18 @@ return {
 
     vim.o.laststatus = vim.g.lualine_laststatus
 
+    local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
+      return function(str)
+        local win_width = vim.fn.winwidth(0)
+        if hide_width and win_width < hide_width then
+          return ""
+        elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+          return str:sub(1, trunc_len) .. (no_ellipsis and "" or "...")
+        end
+        return str
+      end
+    end
+
     local custom_theme = require("lualine.themes.auto")
     -- Change the background of lualine_c section for normal mode
     custom_theme.normal.a.fg = "#5fdaff" -- rgb colors are supported
@@ -30,17 +42,23 @@ return {
     custom_theme.normal.b.bg = "NONE" -- rgb colors are supported
     custom_theme.normal.c.fg = "#eaeaea" -- rgb colors are supported
     custom_theme.normal.c.bg = "NONE" -- rgb colors are supported
-    -- custom_theme.command.c.bg = "#171920" -- rgb colors are supported
+
+    custom_theme.command.b.bg = "NONE" -- rgb colors are supported
+
+    custom_theme.replace.a.fg = "#ff4a00" -- rgb colors are supported
     custom_theme.replace.a.bg = "NONE" -- rgb colors are supported
     custom_theme.replace.b.fg = "#ff4a00" -- rgb colors are supported
+    custom_theme.replace.b.bg = "NONE" -- rgb colors are supported
     -- custom_theme.replace.c.bg = "#171920" -- rgb colors are supported
     custom_theme.visual.a.fg = "#bd93f9" -- rgb colors are supported
     custom_theme.visual.a.bg = "NONE" -- rgb colors are supported
     custom_theme.visual.b.fg = "#bd93f9" -- rgb colors are supported
+    custom_theme.visual.b.bg = "NONE" -- rgb colors are supported
     -- custom_theme.visual.c.bg = "#171920" -- rgb colors are supported
     custom_theme.insert.a.fg = "#abe15b" -- rgb colors are supported
     custom_theme.insert.a.bg = "NONE" -- rgb colors are supported
     custom_theme.insert.b.fg = "#abe15b" -- rgb colors are supported
+    custom_theme.insert.b.bg = "NONE" -- rgb colors are supported
     -- custom_theme.insert.c.bg = "#171920" -- rgb colors are supported
     --
     local function getWords()
@@ -75,7 +93,7 @@ return {
         disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = { { "mode", fmt = trunc(200, 4, nil, true) } },
         lualine_b = {
           { "branch" },
           {
