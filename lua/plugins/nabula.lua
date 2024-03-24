@@ -1,7 +1,9 @@
 return {
   "jbyuki/nabla.nvim",
-  enabled = false,
+  -- enabled = false,
   config = function()
-    require("nabla").enable_virt()
+    -- require("nabla").enable_virt({
+    -- autogen = true,
+    -- })
   end,
 }
