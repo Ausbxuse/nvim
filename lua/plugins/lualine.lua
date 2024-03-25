@@ -34,6 +34,28 @@ return {
       end
     end
 
+    local colors = {
+      _nc = "#16141f",
+      base = "#191724",
+      surface = "#1f1d2e",
+      overlay = "#26233a",
+      muted = "#6e6a86",
+      subtle = "#908caa",
+      text = "#e0def4",
+      magenta = "#fc317e",
+      orange = "#f69c5e",
+      yellow = "#f6c177",
+      green = "#9cce6a",
+      blue = "#4fc1ff",
+      cyan = "#62d8f1",
+      cyan2 = "#89ddff",
+      purple = "#bd93f9",
+      highlight_low = "#21202e",
+      highlight_med = "#403d52",
+      highlight_high = "#524f67",
+      none = "NONE",
+    }
+
     local custom_theme = require("lualine.themes.auto")
     -- Change the background of lualine_c section for normal mode
     custom_theme.normal.a.fg = "#5fdaff" -- rgb colors are supported
@@ -43,6 +65,7 @@ return {
     custom_theme.normal.c.fg = "#eaeaea" -- rgb colors are supported
     custom_theme.normal.c.bg = "NONE" -- rgb colors are supported
 
+    custom_theme.command.a.bg = "NONE" -- rgb colors are supported
     custom_theme.command.b.bg = "NONE" -- rgb colors are supported
 
     custom_theme.replace.a.fg = "#ff4a00" -- rgb colors are supported
@@ -93,31 +116,56 @@ return {
         disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
       },
       sections = {
-        lualine_a = { { "mode", fmt = trunc(200, 4, nil, true) } },
-        lualine_b = {
-          { "branch" },
+        lualine_a = {
           {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-            source = function()
-              local gitsigns = vim.b.gitsigns_status_dict
-              if gitsigns then
-                return {
-                  added = gitsigns.added,
-                  modified = gitsigns.changed,
-                  removed = gitsigns.removed,
-                }
-              end
-            end,
+            "mode",
+            icon = "",
+
+            fmt = trunc(200, 4, nil, true),
+            padding = { left = 1, right = 1 },
           },
+
+          {
+            "branch",
+            icon = "",
+            color = { fg = colors.cyan2 }, -- Set branch color to rose
+            -- separator = { right = " ", left = " " },
+            padding = { left = 0, right = 2 }, -- Adjust the right padding to 1 },
+          },
+          -- { "windows", mode = 2 },
+          -- { "windows", mode = 2 },
+          --[[ {
+            "buffers",
+            buffers_color = {
+              -- Same values as the general color option can be used here.
+              active = Util.ui.fg("ModeMsg"),
+              inactive = Util.ui.fg("MiniCursorword"),
+            },
+            mode = 0,
+            padding = { left = 0, right = 0 },
+          }, ]]
         },
 
+        lualine_b = {},
+
         lualine_c = {
-          Util.lualine.root_dir(),
+          -- Util.lualine.root_dir(),
+          { "filetype", icon_only = true, separator = "", padding = { left = 0, right = 0 } },
+          {
+            -- getMyCwd,
+            "filename",
+            -- color = Util.ui.fg("ModeMsg"),
+            file_status = true,
+            path = 1,
+            shorting_target = 30,
+            symbols = {
+              modified = "󱗼", -- Text to show when the file is modified.
+              readonly = "", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "󰟢", -- Text to show for unnamed buffers.
+              newfile = "", -- Text to show for new created file before first writting
+            },
+            padding = { left = 0, right = 0 },
+          },
           {
             "diagnostics",
             symbols = {
@@ -127,29 +175,14 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          {
-            -- getMyCwd,
-
-            -- color = Util.ui.fg("ModeMsg"),
-            "filename",
-            file_status = true,
-            path = 3,
-            shorting_target = 40,
-            symbols = {
-              modified = "落", -- Text to show when the file is modified.
-              readonly = "", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "󰟢", -- Text to show for unnamed buffers.
-              newfile = "", -- Text to show for new created file before first writting
-            },
-          },
         },
         lualine_x = {
+          { "searchcount" },
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.ui.fg("Statement"),
+              color = Util.ui.fg("Constant"),
             },
             -- stylua: ignore
             {
@@ -175,9 +208,26 @@ return {
             separator = { left = "", right = "" },
           },
         },
+
         lualine_y = {
-          -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
-          -- { "location", padding = { left = 0, right = 1 } },
+          {
+            "diff",
+            symbols = {
+              added = icons.git.added,
+              modified = icons.git.modified,
+              removed = icons.git.removed,
+            },
+            source = function()
+              local gitsigns = vim.b.gitsigns_status_dict
+              if gitsigns then
+                return {
+                  added = gitsigns.added,
+                  modified = gitsigns.changed,
+                  removed = gitsigns.removed,
+                }
+              end
+            end,
+          },
         },
         lualine_z = {
           --[[ function()
