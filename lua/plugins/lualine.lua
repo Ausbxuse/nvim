@@ -67,9 +67,11 @@ return {
 
     custom_theme.command.a.bg = "NONE" -- rgb colors are supported
     custom_theme.command.b.bg = "NONE" -- rgb colors are supported
+    custom_theme.command.a.fg = colors.cyan2 -- rgb colors are supported
+    custom_theme.command.b.fg = colors.cyan2 -- rgb colors are supported
 
-    custom_theme.replace.a.fg = "#ff4a00" -- rgb colors are supported
-    custom_theme.replace.a.bg = "NONE" -- rgb colors are supported
+    custom_theme.replace.a.bg = "#ff4a00" -- rgb colors are supported
+    custom_theme.replace.a.fg = "NONE" -- rgb colors are supported
     custom_theme.replace.b.fg = "#ff4a00" -- rgb colors are supported
     custom_theme.replace.b.bg = "NONE" -- rgb colors are supported
     -- custom_theme.replace.c.bg = "#171920" -- rgb colors are supported
@@ -159,7 +161,7 @@ return {
             path = 1,
             shorting_target = 30,
             symbols = {
-              modified = "󱗼", -- Text to show when the file is modified.
+              modified = "🤔", -- Text to show when the file is modified.
               readonly = "", -- Text to show when the file is non-modifiable or readonly.
               unnamed = "󰟢", -- Text to show for unnamed buffers.
               newfile = "", -- Text to show for new created file before first writting
@@ -230,6 +232,7 @@ return {
           },
         },
         lualine_z = {
+          { "progress" },
           --[[ function()
             return " " .. os.date("%R")
           end, ]]

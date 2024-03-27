@@ -1,6 +1,7 @@
 return {
   {
     "L3MON4D3/LuaSnip",
+    event = "VeryLazy",
     enabled = true,
     keys = function()
       return {}
@@ -8,6 +9,7 @@ return {
   },
   {
     "iurimateus/luasnip-latex-snippets.nvim",
+    event = "VeryLazy",
     config = function()
       require("luasnip-latex-snippets").setup({
         allow_on_markdown = true,

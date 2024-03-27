@@ -92,6 +92,26 @@ vim.keymap.set("n", "<C-l>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-f>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-/>", "", { desc = "Noop" })
 vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
+vim.keymap.set("x", "p", "P", { desc = "Better paste" })
+
+vim.g.help_window_maximized = false
+
+function Toggle_window()
+  if vim.g.help_window_maximized then
+    vim.api.nvim_command("wincmd =") -- Equalizes the window sizes
+    vim.g.help_window_maximized = false
+  else
+    vim.api.nvim_command("wincmd |") -- Maximize width
+    vim.api.nvim_command("wincmd _") -- Maximize height
+    vim.g.help_window_maximized = true
+    -- vim.api.nvim_win_set_width(0, vim.o.columns) -- Use the full width of the Neovim window
+    -- vim.api.nvim_win_set_height(0, vim.o.lines - 1) -- Use the full height, adjusting for the command line
+  end
+end
+
+-- Correct the function name in the keymap setting
+
+vim.keymap.set("n", "<leader>=", ":silent lua Toggle_window()<CR>", { desc = "Noop" })
 
 --[[ vim.keymap.set("n", "<C-f>h", "<C-w>h", { desc = "Go to left window" })
 vim.keymap.set("n", "<C-f>j", "<C-w>j", { desc = "Go to lower window" })
@@ -143,18 +163,4 @@ elseif &filetype == 'html'
 exec 'silent !live-server &'
 endif
 endfunc
-
-function! ToggleZoom(zoom)
-if exists("t:restore_zoom") && (a:zoom == v:true || t:restore_zoom.win != winnr())
-exec t:restore_zoom.cmd
-unlet t:restore_zoom
-elseif a:zoom
-let t:restore_zoom = { 'win': winnr(), 'cmd': winrestcmd() }
-exec "normal \<C-W>\|\<C-W>_"
-endif
-endfunction
-
-augroup restorezoom
-au WinEnter * silent! :call ToggleZoom(v:false)
-augroup END
 ]])
