@@ -99,13 +99,6 @@ return {
         return ""
       end
     end
-    local function getMyCwd()
-      local home = os.getenv("HOME") -- Get the home directory path
-      local cwd = vim.fn.getcwd() -- Get the current working directory
-      local cwd_with_tilde = cwd:gsub("^" .. home, "~") -- Replace the home directory with ~
-      return cwd_with_tilde .. "/" -- Print the modified path
-    end
-
     return {
       options = {
         icons_enabled = true,
@@ -124,7 +117,7 @@ return {
             icon = "",
 
             fmt = trunc(200, 4, nil, true),
-            padding = { left = 1, right = 1 },
+            padding = { left = 1, right = 0 },
           },
 
           {
@@ -132,7 +125,7 @@ return {
             icon = "",
             color = { fg = colors.cyan2 }, -- Set branch color to rose
             -- separator = { right = " ", left = " " },
-            padding = { left = 0, right = 2 }, -- Adjust the right padding to 1 },
+            padding = { left = 1, right = 0 }, -- Adjust the right padding to 1 },
           },
           -- { "windows", mode = 2 },
           -- { "windows", mode = 2 },
@@ -152,7 +145,7 @@ return {
 
         lualine_c = {
           -- Util.lualine.root_dir(),
-          { "filetype", icon_only = true, separator = "", padding = { left = 0, right = 0 } },
+          { "filetype", icon_only = true, separator = "", padding = { left = 2, right = 0 } },
           {
             -- getMyCwd,
             "filename",
@@ -162,12 +155,13 @@ return {
             shorting_target = 30,
             symbols = {
               modified = "🤔", -- Text to show when the file is modified.
-              readonly = "", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "󰟢", -- Text to show for unnamed buffers.
-              newfile = "", -- Text to show for new created file before first writting
+              readonly = "😠", -- Text to show when the file is non-modifiable or readonly.
+              unnamed = "😶", -- Text to show for unnamed buffers.
+              newfile = "🙂", -- Text to show for new created file before first writting
             },
             padding = { left = 0, right = 0 },
           },
+          { "filesize", padding = { left = 0, right = 0 } },
           {
             "diagnostics",
             symbols = {

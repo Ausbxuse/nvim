@@ -50,4 +50,6 @@ vim.cmd([[
           \ 'verbose': v:true,
           \}
     
+
+  " autocmd FileType help setlocal winheight=100 winwidth=100
 ]])
