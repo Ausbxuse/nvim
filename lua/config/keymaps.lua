@@ -4,7 +4,7 @@ local telescope = require("telescope")
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+-- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohl|lua require('notify').dismiss()<CR>")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -77,7 +77,7 @@ vim.keymap.set("n", "<leader>\\", lazyterm, { desc = "Terminal (root dir)" })
 vim.keymap.set("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal vim.keymap.setpings
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Normal" })
+-- vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Normal" })
 vim.keymap.set("t", "<C-h>", "", { desc = "Noop" })
 vim.keymap.set("t", "<C-j>", "", { desc = "Noop" })
 vim.keymap.set("t", "<C-k>", "", { desc = "Noop" })

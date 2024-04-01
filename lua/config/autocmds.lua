@@ -8,6 +8,7 @@ vim.cmd([[
     " "au BufRead *.vim setlocal foldmethod=marker
     " "autocmd Filetype lua setlocal foldmethod=marker
     autocmd TermOpen * startinsert
+    autocmd TermOpen * setlocal nonumber norelativenumber
 
     " Remove trailing whitespaces automatically before save
     " augroup strip_ws
@@ -51,5 +52,18 @@ vim.cmd([[
           \}
     
 
+
   " autocmd FileType help setlocal winheight=100 winwidth=100
 ]])
+
+-- Disable status bar in terminal mode
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  command = "setlocal nonumber norelativenumber | set laststatus=0",
+})
+
+-- Re-enable status bar when leaving terminal mode
+vim.api.nvim_create_autocmd({ "BufLeave", "TermClose" }, {
+  pattern = "term://*",
+  command = "set laststatus=2",
+})
