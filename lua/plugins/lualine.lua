@@ -117,7 +117,7 @@ return {
             icon = "",
 
             fmt = trunc(200, 4, nil, true),
-            padding = { left = 1, right = 0 },
+            padding = { left = 1, right = 1 },
           },
 
           {
@@ -125,7 +125,7 @@ return {
             icon = "",
             color = { fg = colors.cyan2 }, -- Set branch color to rose
             -- separator = { right = " ", left = " " },
-            padding = { left = 1, right = 0 }, -- Adjust the right padding to 1 },
+            padding = { left = 0, right = 0 }, -- Adjust the right padding to 1 },
           },
           -- { "windows", mode = 2 },
           -- { "windows", mode = 2 },
@@ -155,7 +155,7 @@ return {
             shorting_target = 30,
             symbols = {
               modified = "🤔", -- Text to show when the file is modified.
-              readonly = "😠", -- Text to show when the file is non-modifiable or readonly.
+              readonly = "🔴", -- Text to show when the file is non-modifiable or readonly.
               unnamed = "😶", -- Text to show for unnamed buffers.
               newfile = "🙂", -- Text to show for new created file before first writting
             },
