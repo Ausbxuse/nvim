@@ -56,7 +56,7 @@ vim.cmd([[
   " autocmd FileType help setlocal winheight=100 winwidth=100
 ]])
 
--- Disable status bar in terminal mode
+--[[ -- Disable status bar in terminal mode
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
   command = "setlocal nonumber norelativenumber | set laststatus=0",
@@ -66,4 +66,4 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd({ "BufLeave", "TermClose" }, {
   pattern = "term://*",
   command = "set laststatus=2",
-})
+}) ]]
