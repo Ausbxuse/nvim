@@ -132,7 +132,7 @@ else
                   ["en-US"] = words,
                 },
               },
-            }, ]]
+            },
           },
         },
         -- you can do any additional lsp server setup here
@@ -147,30 +147,8 @@ else
           -- ["*"] = function(server, opts) end,
         },
       },
-      config = function()
-        local on_attach = function(client, bufnr)
-          local function conditional_document_changes()
-            if vim.fn.mode() == "i" then -- If currently in insert mode, do nothing
-              return true
-            else
-              return false -- Else, allow normal operation
-            end
-          end
-
-          client._notify = client.notify
-          client.notify = function(method, params)
-            if method == "textDocument/didChange" and conditional_document_changes() then
-              return -- Do nothing if in insert mode
-            else
-              client._notify(method, params)
-            end
-          end
-        end
-
-        require("lspconfig").ltex.setup({
-          on_attach = on_attach,
-        })
-      end,
+      -- config = function()
+      -- end,
     },
   }
 end

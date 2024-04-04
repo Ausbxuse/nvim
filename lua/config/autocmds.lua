@@ -75,3 +75,62 @@ vim.api.nvim_create_autocmd({ "BufLeave", "TermClose" }, {
   pattern = "term://*",
   command = "set laststatus=2",
 }) ]]
+
+local on_attach = function(client, bufnr)
+  local function conditional_document_changes()
+    if vim.fn.mode() == "i" then -- If currently in insert mode, do nothing
+      return true
+    else
+      return false -- Else, allow normal operation
+    end
+  end
+
+  if not client._original_notify then -- Only override if not already done
+    client._original_notify = client.notify
+    client.notify = function(method, params)
+      if method == "textDocument/didChange" and conditional_document_changes() then
+        return -- Do nothing if in insert mode
+      else
+        -- Use the saved original notify method to avoid recursion
+        client._original_notify(method, params)
+      end
+    end
+  end
+end
+
+require("lspconfig").ltex.setup({
+  on_attach = on_attach,
+})
+
+--[[ local on_attach = function(client, bufnr)
+  -- Override the notify method to suppress textDocument/didChange notifications
+  if not client._original_notify then
+    client._original_notify = client.notify
+    client.notify = function(method, params)
+      if method == "textDocument/didChange" then
+        -- Suppress all didChange notifications; we'll manually trigger them later
+        return
+      else
+        client._original_notify(method, params)
+      end
+    end
+  end
+
+  -- Set up an autocommand to trigger a document check when leaving insert mode
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    buffer = bufnr,
+    callback = function()
+      -- Manually trigger a textDocument/didChange notification for the current buffer
+      -- You might need to construct the params according to the server's requirements
+      local params = vim.lsp.util.make_text_document_params()
+      -- Adding the necessary content changes or other parameters according to LSP spec
+      -- This example assumes the server can infer the changes or that full content is sent
+      params.contentChanges = { { text = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n") } }
+      client._original_notify("textDocument/didChange", params)
+    end
+  })
+end
+
+require("lspconfig").ltex.setup({
+  on_attach = on_attach,
+}) ]]
