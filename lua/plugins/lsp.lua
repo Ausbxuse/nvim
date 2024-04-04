@@ -30,11 +30,14 @@ if isTermux() then
     },
   }
 else
+  local words = {}
+  for word in io.open(vim.fn.stdpath("config") .. "/spell/en.utf-8.add", "r"):lines() do
+    table.insert(words, word)
+  end
   conf = {
     -- LSP keymaps
     {
       "neovim/nvim-lspconfig",
-
       opts = {
         diagnostics = {
           underline = true,
@@ -48,6 +51,14 @@ else
             -- prefix = "icons",
           },
           severity_sort = true,
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = LazyVim.config.icons.diagnostics.Error,
+              [vim.diagnostic.severity.WARN] = LazyVim.config.icons.diagnostics.Warn,
+              [vim.diagnostic.severity.HINT] = LazyVim.config.icons.diagnostics.Hint,
+              [vim.diagnostic.severity.INFO] = LazyVim.config.icons.diagnostics.Info,
+            },
+          },
         },
         -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
         -- Be aware that you also will need to properly configure your LSP server to
@@ -91,20 +102,34 @@ else
             },
           },
           ltex = {
-            -- mason = false, -- set to false if you don't want this server to be installed with mason
-            -- Use this to add any additional keymaps
-            -- for specific lsp servers
-            -- keys = {},
             settings = {
-              Lua = {
+              ltex = {
+                enabled = {
+                  "bibtex",
+                  "gitcommit",
+                  "markdown",
+                  "org",
+                  "tex",
+                  "restructuredtext",
+                  "rsweave",
+                  "latex",
+                  "quarto",
+                  "rmd",
+                  "context",
+                  "html",
+                  "xhtml",
+                },
                 workspace = {
                   checkThirdParty = false,
                 },
                 codeLens = {
-                  enable = true,
+                  enable = false,
                 },
                 completion = {
                   callSnippet = "Replace",
+                },
+                dictionary = {
+                  ["en-US"] = words,
                 },
               },
             },
@@ -122,6 +147,30 @@ else
           -- ["*"] = function(server, opts) end,
         },
       },
+      config = function()
+        local on_attach = function(client, bufnr)
+          local function conditional_document_changes()
+            if vim.fn.mode() == "i" then -- If currently in insert mode, do nothing
+              return true
+            else
+              return false -- Else, allow normal operation
+            end
+          end
+
+          client._notify = client.notify
+          client.notify = function(method, params)
+            if method == "textDocument/didChange" and conditional_document_changes() then
+              return -- Do nothing if in insert mode
+            else
+              client._notify(method, params)
+            end
+          end
+        end
+
+        require("lspconfig").ltex.setup({
+          on_attach = on_attach,
+        })
+      end,
     },
   }
 end

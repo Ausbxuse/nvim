@@ -9,9 +9,11 @@ nvim
 config
 usc
 ltex
-ltex
-ltex
-ltex
 archbxuse
 nvim
-ltex
+syncthing
+linux
+Termux
+fzf
+ZMK
+lazyvim
