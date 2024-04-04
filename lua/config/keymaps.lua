@@ -11,8 +11,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<leader>r", "<cmd>call Compile() <CR>")
 
-vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<cr>")
-vim.keymap.set("n", "<leader>b<cr>", "<cmd>e #<cr>")
+vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<leader><space>", "<cmd>e #<cr>")
 vim.keymap.set("n", "<leader>/", ":Telescope current_buffer_fuzzy_find<cr>")
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fd", telescope.extensions.zoxide.list)
@@ -28,7 +28,7 @@ vim.keymap.set("n", "<C-n>", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
 vim.keymap.set(
   "n",
-  "<leader>sp",
+  "<leader>z",
   "<cmd> lua require('telescope.builtin').spell_suggest(require('telescope.themes').get_cursor({}))<cr>"
 )
 
@@ -48,10 +48,10 @@ vim.keymap.set("n", "<A-k>", require("smart-splits").move_cursor_up)
 vim.keymap.set("n", "<A-l>", require("smart-splits").move_cursor_right)
 vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous)
 -- swapping buffers between windows
-vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
+--[[ vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
 vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
 vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
-vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
+vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right) ]]
 
 -- vim.keymap.set("n", "<A-k>", require("smart-splits").move_cursor_up, { desc = "No op" })
 -- vim.keymap.set("n", "<A-j>", require("smart-splits").move_cursor_down, { desc = "No op" })
@@ -88,10 +88,16 @@ vim.keymap.set("t", "<c-_>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-h>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-j>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-k>", "", { desc = "Noop" })
--- vim.keymap.set("n", "<C-l>", "", { desc = "Noop" })
+vim.keymap.set("n", "<C-l>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-f>", "", { desc = "Noop" })
 vim.keymap.set("n", "<C-/>", "", { desc = "Noop" })
 vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
+
+vim.keymap.set("n", "<leader>be", "", { desc = "Noop" })
+vim.keymap.set("n", "<leader>bD", "", { desc = "Noop" })
+vim.keymap.set("n", "<leader>bd", "", { desc = "Noop" })
+vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
+
 vim.keymap.set("x", "p", "P", { desc = "Better paste" })
 
 vim.g.help_window_maximized = false

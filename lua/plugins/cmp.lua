@@ -1,3 +1,11 @@
+local home = vim.fn.expand("$HOME")
+
+local function set_path(file_path)
+  local file_stat = vim.loop.fs_stat(file_path)
+  local path_variable = file_stat and file_path or nil
+  return path_variable
+end
+
 return {
   {
     "L3MON4D3/LuaSnip",
@@ -8,7 +16,8 @@ return {
     end,
   },
   {
-    "iurimateus/luasnip-latex-snippets.nvim",
+    "ausbxuse/luasnip-latex-snippets.nvim",
+    dir = set_path(home .. "/.local/src/public-repos/luasnip-latex-snippets.nvim"),
     event = "VeryLazy",
     config = function()
       require("luasnip-latex-snippets").setup({
@@ -28,6 +37,11 @@ return {
           { trig = "mk", snippetType = "autosnippet", priority = 100 },
           fmta("$<>$<>", { i(1), i(2) }),
           { condition = not_math }
+        ),
+        s(
+          { trig = "choose", snippetType = "autosnippet", priority = 100 },
+          fmta("\\binom{<>}{<>}<>", { i(1), i(2), i(3) }),
+          { condition = not not_math }
         ),
       })
     end,
@@ -119,13 +133,12 @@ return {
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<CR>"] = cmp.config.disable,
         ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
+          if luasnip.locally_jumpable(1) then
+            luasnip.jump(1)
+          elseif cmp.visible() then
             -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+            -- cmp.select_next_item()
             cmp.confirm({ select = true })
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
           elseif has_words_before() then
             cmp.complete()
           else
