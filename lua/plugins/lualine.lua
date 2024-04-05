@@ -145,7 +145,7 @@ return {
 
         lualine_c = {
           -- Util.lualine.root_dir(),
-          { "filetype", icon_only = true, separator = "", padding = { left = 2, right = 0 } },
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
             -- getMyCwd,
             "filename",

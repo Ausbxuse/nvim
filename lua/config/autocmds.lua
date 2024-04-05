@@ -137,8 +137,10 @@ require("lspconfig").ltex.setup({
   on_attach = on_attach,
   settings = {
     ltex = {
+      language = "en",
       additionalRules = {
-        enablePickyRules = true,
+        -- enablePickyRules = true,
+        languageModel = "~/.local/share/ngrams/",
       },
       completionEnabled = true,
     },
