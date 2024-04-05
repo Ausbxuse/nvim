@@ -96,6 +96,7 @@ vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
 vim.keymap.set("n", "<leader>be", "", { desc = "Noop" })
 vim.keymap.set("n", "<leader>bD", "", { desc = "Noop" })
 vim.keymap.set("n", "<leader>bd", "", { desc = "Noop" })
+vim.keymap.set("n", "<leader>bb", "", { desc = "Noop" })
 vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
 
 vim.keymap.set("x", "p", "P", { desc = "Better paste" })

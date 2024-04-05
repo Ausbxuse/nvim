@@ -135,4 +135,12 @@ end
 
 require("lspconfig").ltex.setup({
   on_attach = on_attach,
+  settings = {
+    ltex = {
+      additionalRules = {
+        enablePickyRules = true,
+      },
+      completionEnabled = true,
+    },
+  },
 })
