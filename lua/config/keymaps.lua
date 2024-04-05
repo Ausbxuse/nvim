@@ -100,6 +100,8 @@ vim.keymap.set("n", "<c-_>", "", { desc = "Noop" })
 
 vim.keymap.set("x", "p", "P", { desc = "Better paste" })
 
+vim.keymap.set("n", "<leader>m", "<cmd>lua require('nabla').toggle_virt()<CR>", { desc = "Show Math" })
+
 vim.g.help_window_maximized = false
 
 function Toggle_window()

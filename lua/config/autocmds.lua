@@ -61,7 +61,7 @@ let g:vim_markdown_new_list_item_indent = 1
 
 syn region mkdMath matchgroup=mkdDelimiter start="\\\@<!\\(" end="\\)"
 syn region mkdMath matchgroup=mkdDelimiter start="\\\@<!\\\[" end="\\\]"
-  " autocmd FileType help setlocal winheight=100 winwidth=100
+
 ]])
 
 --[[ -- Disable status bar in terminal mode
