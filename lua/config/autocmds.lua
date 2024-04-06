@@ -146,3 +146,29 @@ require("lspconfig").ltex.setup({
     },
   },
 })
+_G.auto_insert_checkbox = function()
+  local current_line = vim.api.nvim_get_current_line()
+  -- Capture the leading whitespace and the checkbox pattern
+  local indent, checkbox = string.match(current_line, "^(%s*)(%-%s*%[%s%])")
+  vim.api.nvim_put({ "" }, "l", true, false)
+  if checkbox then
+    -- If a checkbox is found, insert a new line with the same indentation followed by the checkbox
+    local new_line = indent .. "- [ ] "
+    vim.api.nvim_put({ new_line }, "c", true, true)
+  else
+  end
+end
+
+-- Set up the autocmd
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.md",
+  callback = function()
+    vim.api.nvim_buf_set_keymap(
+      0,
+      "i",
+      "<CR>",
+      "<cmd>lua _G.auto_insert_checkbox()<CR>",
+      { noremap = true, silent = true }
+    )
+  end,
+})
